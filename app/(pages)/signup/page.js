@@ -11,6 +11,8 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [message, setMessage] = useState("Creating user...");
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = () => {
     // Add your email validation logic here
@@ -20,6 +22,7 @@ const Signup = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (validateEmail()) {
       try {
@@ -39,13 +42,23 @@ const Signup = () => {
 
         if (response.status === 201) {
           // Successful signup, redirect to login or any other page
+          setIsLoading(false);
           router.push("/signin");
-          set;
+        } else if (response.status === 202) {
+          setEmailError("User with this email already exists");
         } else {
           console.error(`Signup failed with status ${response.status}`);
         }
       } catch (error) {
-        console.error("An error occurred:", error);
+        if (error.response && error.response.status === 202) {
+          // User Already Exist
+          setEmailError("User with this email already exists");
+        } else {
+          // Other errors
+          console.error("An error occurred:", error);
+        }
+      } finally {
+        setIsLoading(false);
       }
     } else {
       setEmailError("Provide a valid email");
@@ -79,10 +92,13 @@ const Signup = () => {
               id="email"
               placeholder="Enter your e-mail"
               className="h-10 px-3 border rounded-md focus:outline-none focus:border-blue-500"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError("");
+              }}
             />
             {emailError && (
-              <p className="text-red-500 text-xs mt-1">{emailError}</p>
+              <p className="text-red-500 text-md ">{emailError}</p>
             )}
 
             <label htmlFor="password" className="text-sm font-semibold">
@@ -96,6 +112,11 @@ const Signup = () => {
               placeholder="Enter your password"
               className="h-10 px-3 border rounded-md focus:outline-none focus:border-blue-500"
             />
+            {isLoading && (
+              <div className="w-full flex items-center justify-center">
+                {message}
+              </div>
+            )}
 
             <button
               type="submit"
