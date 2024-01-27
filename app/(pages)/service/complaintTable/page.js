@@ -60,19 +60,20 @@ const ComplaintTable = ({ complaints, isUser }) => {
                     {complaint.createdAt}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    <Link
-                      href={{
-                        pathname: isUser ? "/user/timeline" : "/edit",
-                        query: {
-                          id: complaint.complaintNumber,
-                          user: isUser || null,
-                        },
+                    <span
+                      className="text-blue-500 hover:underline cursor-pointer"
+                      onClick={() => {
+                        router.push({
+                          pathname: isUser ? "/user/timeline" : "/edit",
+                          query: {
+                            id: complaint.complaintNumber,
+                            user: isUser || null,
+                          },
+                        });
                       }}
                     >
-                      <span className="text-blue-500 hover:underline">
-                        {isUser ? "View" : "Edit"}
-                      </span>
-                    </Link>
+                      {isUser ? "View" : "Edit"}
+                    </span>
                   </td>
                 </tr>
               ))}
