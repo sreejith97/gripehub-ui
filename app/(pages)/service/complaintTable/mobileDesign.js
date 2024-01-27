@@ -45,6 +45,8 @@ const MobileDesign = ({ complaints, isUser }) => {
       return 0; // No sorting for other fields
     }
   });
+
+  const pathName = "/service/edit";
   return (
     <>
       <div className="lg:overflow-x-hidden overflow-x-scroll w-[400px] lg:w-auto lg:hidden">
@@ -86,7 +88,7 @@ const MobileDesign = ({ complaints, isUser }) => {
               <div className="bg-yellow-300 p-2 rounded-xl flex items-center justify-center uppercase font-bold text-[14px] mx-20 my-5">
                 <Link
                   href={{
-                    pathname: "/service/edit",
+                    pathname: pathName,
                     query: {
                       id: complaint.complaintNumber,
                     },

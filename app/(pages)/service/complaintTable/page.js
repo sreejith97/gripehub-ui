@@ -45,6 +45,8 @@ const ComplaintTable = ({ complaints, isUser }) => {
         return 0; // No sorting for other fields
     }
   });
+
+  const pathName = "/service/edit";
   return (
     <>
       <div className="lg:overflow-x-hidden overflow-x-scroll w-[400px] lg:w-auto hidden lg:block">
@@ -144,7 +146,7 @@ const ComplaintTable = ({ complaints, isUser }) => {
                   <td className="border border-gray-300 px-4 py-2">
                     <Link
                       href={{
-                        pathname: "/service/edit",
+                        pathname: pathName,
                         query: {
                           id: complaint.complaintNumber,
                         },
