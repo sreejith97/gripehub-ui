@@ -1,52 +1,9 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import MobileDesign from "./mobileDesign";
 
 const ComplaintTable = ({ complaints, isUser }) => {
-  const [sortBy, setSortBy] = useState({ field: "createdAt", order: "asc" });
-
-  const formatCreatedAt = (createdAt) => {
-    const options = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    };
-
-    return new Intl.DateTimeFormat("en-US", options).format(
-      new Date(createdAt)
-    );
-  };
-
-  const handleSort = (field) => {
-    setSortBy((prevSortBy) => ({
-      field,
-      order:
-        prevSortBy.field === field && prevSortBy.order === "asc"
-          ? "desc"
-          : "asc",
-    }));
-  };
-
-  const sortedComplaints = [...complaints].sort((a, b) => {
-    switch (sortBy.field) {
-      case "status":
-        return sortBy.order === "asc"
-          ? a.status.localeCompare(b.status)
-          : b.status.localeCompare(a.status);
-      case "createdAt":
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
-        return sortBy.order === "asc" ? dateA - dateB : dateB - dateA;
-      default:
-        return 0; // No sorting for other fields
-    }
-  });
-
-  const pathName = "/service/edit";
   return (
     <>
       <div className="lg:overflow-x-hidden overflow-x-scroll w-[400px] lg:w-auto hidden lg:block">
@@ -54,63 +11,22 @@ const ComplaintTable = ({ complaints, isUser }) => {
           <table className="min-w-full bg-white border border-gray-300">
             <thead className="hidden md:table-header-group">
               <tr>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("complaintNumber")}
-                >
+                <th className="border border-gray-300 px-4 py-2">
                   Complaint Number
                 </th>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("topic")}
-                >
-                  Topic
-                </th>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("email")}
-                >
-                  Email
-                </th>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("tag")}
-                >
-                  Tag
-                </th>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("productName")}
-                >
+                <th className="border border-gray-300 px-4 py-2">Topic</th>
+                <th className="border border-gray-300 px-4 py-2">Email</th>
+                <th className="border border-gray-300 px-4 py-2">Tag</th>
+                <th className="border border-gray-300 px-4 py-2">
                   Product Name
                 </th>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("status")}
-                >
-                  Status
-                  {sortBy.field === "status" && (
-                    <span className="ml-1">
-                      {sortBy.order === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
-                <th
-                  className="border border-gray-300 px-4 py-2 cursor-pointer"
-                  onClick={() => handleSort("createdAt")}
-                >
-                  Created At
-                  {sortBy.field === "createdAt" && (
-                    <span className="ml-1">
-                      {sortBy.order === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
+                <th className="border border-gray-300 px-4 py-2">Status</th>
+                <th className="border border-gray-300 px-4 py-2">Created At</th>
                 <th className="border border-gray-300 px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {sortedComplaints.map((complaint) => (
+              {complaints.map((complaint) => (
                 <tr key={complaint.id}>
                   <td className="border border-gray-300 px-4 py-2">
                     {complaint.complaintNumber}
@@ -141,21 +57,22 @@ const ComplaintTable = ({ complaints, isUser }) => {
                     {complaint.status}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {formatCreatedAt(complaint.createdAt)}
+                    {complaint.createdAt}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {/* <Link
+                    <Link
                       href={{
-                        pathname: pathName,
+                        pathname: isUser ? "/user/timeline" : "/edit",
                         query: {
                           id: complaint.complaintNumber,
+                          user: isUser || null,
                         },
                       }}
                     >
                       <span className="text-blue-500 hover:underline">
-                        Edit
+                        {isUser ? "View" : "Edit"}
                       </span>
-                    </Link> */}
+                    </Link>
                   </td>
                 </tr>
               ))}
