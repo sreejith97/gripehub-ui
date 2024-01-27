@@ -26,7 +26,7 @@ const ComplaintTable = ({ complaints, isUser }) => {
               </tr>
             </thead>
             <tbody>
-              {complaints.map((complaint) => (
+              {complaints?.map((complaint) => (
                 <tr key={complaint.id}>
                   <td className="border border-gray-300 px-4 py-2">
                     {complaint.complaintNumber}
