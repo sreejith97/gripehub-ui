@@ -109,7 +109,7 @@ const ServicePage = () => {
         {complaints ? (
           complaints.length > 0 ? (
             <div className="max-w-full overflow-x-hidden">
-              <ComplaintList complaints={complaints} />
+              <ComplaintList complaints={complaints} isService={true} />
             </div>
           ) : (
             "No complaints"

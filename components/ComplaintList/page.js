@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import MobileDesign from "./mobileDesign";
 
-const ComplaintList = ({ complaints, isUser }) => {
+const ComplaintList = ({ complaints, isUser, isService }) => {
   const [sortBy, setSortBy] = useState({ field: "createdAt", order: "asc" });
 
   const formatCreatedAt = (createdAt) => {
@@ -144,7 +144,11 @@ const ComplaintList = ({ complaints, isUser }) => {
                   <td className="border border-gray-300 px-4 py-2">
                     <Link
                       href={{
-                        pathname: isUser ? "/user/timeline" : "/edit",
+                        pathname: isUser
+                          ? "/user/timeline"
+                          : isService
+                          ? "/service/edit"
+                          : "/edit",
                         query: {
                           id: complaint.complaintNumber,
                           user: isUser || null,
@@ -152,7 +156,7 @@ const ComplaintList = ({ complaints, isUser }) => {
                       }}
                     >
                       <span className="text-blue-500 hover:underline">
-                        {isUser ? "View" : "Edit"}
+                        {isUser ? "View" : isService ? "Assign" : "Edit"}
                       </span>
                     </Link>
                   </td>
@@ -163,7 +167,11 @@ const ComplaintList = ({ complaints, isUser }) => {
         </div>
       </div>
 
-      <MobileDesign complaints={complaints} isUser={isUser} />
+      <MobileDesign
+        complaints={complaints}
+        isUser={isUser}
+        isService={isService}
+      />
     </>
   );
 };

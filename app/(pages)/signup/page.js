@@ -78,6 +78,7 @@ const Signup = () => {
               type="text"
               name="name"
               id="name"
+              required
               placeholder="Enter your name"
               className="h-10 px-3 border rounded-md focus:outline-none focus:border-blue-500"
               onChange={(e) => setName(e.target.value)}
@@ -90,6 +91,7 @@ const Signup = () => {
               type="email"
               name="email"
               id="email"
+              required
               placeholder="Enter your e-mail"
               className="h-10 px-3 border rounded-md focus:outline-none focus:border-blue-500"
               onChange={(e) => {
@@ -108,6 +110,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               name="password"
+              required
               id="password"
               placeholder="Enter your password"
               className="h-10 px-3 border rounded-md focus:outline-none focus:border-blue-500"
