@@ -86,7 +86,7 @@ const MobileDesign = ({ complaints, isUser }) => {
                 {formatCreatedAt(complaint.createdAt)}
               </div>
               <div className="bg-yellow-300 p-2 rounded-xl flex items-center justify-center uppercase font-bold text-[14px] mx-20 my-5">
-                <Link
+                {/* <Link
                   href={{
                     pathname: pathName,
                     query: {
@@ -97,7 +97,7 @@ const MobileDesign = ({ complaints, isUser }) => {
                   <span className="text-blue-500 hover:underline">
                     {isUser ? "View" : "Edit"}
                   </span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           ))}

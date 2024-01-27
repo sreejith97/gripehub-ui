@@ -144,7 +144,7 @@ const ComplaintTable = ({ complaints, isUser }) => {
                     {formatCreatedAt(complaint.createdAt)}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    <Link
+                    {/* <Link
                       href={{
                         pathname: pathName,
                         query: {
@@ -155,7 +155,7 @@ const ComplaintTable = ({ complaints, isUser }) => {
                       <span className="text-blue-500 hover:underline">
                         Edit
                       </span>
-                    </Link>
+                    </Link> */}
                   </td>
                 </tr>
               ))}
