@@ -1,7 +1,9 @@
-import { Inter } from "next/font/google";
+// import { Ubuntu } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
+import Header from "@/components/header/page";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Ubuntu({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <AuthProvider>
+          <Header />
+          <div className="mt-20">{children}</div>
+        </AuthProvider>
+      </body>
     </html>
   );
 }
