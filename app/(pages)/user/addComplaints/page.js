@@ -10,6 +10,8 @@ const AddCompalints = () => {
   const router = useRouter();
   const { login, user, setIsLogin } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
+  const [message, setMessage] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     message: "",
@@ -33,7 +35,11 @@ const AddCompalints = () => {
 
           setIsLogin(true);
           login(response.data);
-          setFormData({ email: response.data.user.email });
+          setIsLoading(false);
+          setFormData((prevData) => ({
+            ...prevData,
+            email: response.data.user.email,
+          }));
           setIsLoading(false);
         } catch (error) {
           console.error("Error fetching profile:", error);
@@ -62,10 +68,7 @@ const AddCompalints = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-
-    // Validate form data (you can add your validation logic here)
-
-    // Assuming you have an API endpoint to submit the form data
+    setIsLoading(true); // Set loading to true when starting the request
     try {
       const response = await fetch(
         `${process.env.BASE_URL}register-complaint`,
@@ -81,17 +84,23 @@ const AddCompalints = () => {
 
       if (response.ok) {
         // Handle success, e.g., show a success message
+        setMessage(true);
         console.log("Complaint submitted successfully!");
-        router.push("/");
+
+        // Delay the router push to give time for the success message to be seen
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
       } else {
         // Handle error, e.g., show an error message
         console.error("Error submitting complaint");
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // Set loading to false regardless of success or error
     }
   };
-
   return (
     <div className="mt-[100px]">
       {isLoading ? (
@@ -154,12 +163,19 @@ const AddCompalints = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-            >
-              Submit
-            </button>
+            {message && (
+              <div className="w-full flex items-center justify-center text-red-500">
+                Check your email for details {formData.email || "user email"}
+              </div>
+            )}
+            <div className="flex w-full justify-center items-center mt-5">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       )}

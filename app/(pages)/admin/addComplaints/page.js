@@ -7,6 +7,7 @@ import axios from "axios";
 
 const AddCompalints = () => {
   const router = useRouter();
+  const [message, setMessage] = useState(false);
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +26,7 @@ const AddCompalints = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
 
     // Validate form data (you can add your validation logic here)
 
@@ -56,7 +58,10 @@ const AddCompalints = () => {
       console.error("Error:", error);
     } finally {
       // Set isLoading back to false after the API call is complete
-      router.push("/");
+      setMessage(true);
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
       setIsLoading(false);
     }
   };
@@ -76,7 +81,7 @@ const AddCompalints = () => {
               </label>
               <input
                 type="text"
-                name="name"
+                name="userName"
                 // value={formData.userEmail}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border rounded-md"
@@ -136,12 +141,20 @@ const AddCompalints = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-            >
-              Submit
-            </button>
+            {message && (
+              <div className="w-full flex items-center justify-center text-red-500">
+                Check your email for details {formData.email || "user email"}
+              </div>
+            )}
+
+            <div className="flex w-full justify-center items-center mt-5">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       )}

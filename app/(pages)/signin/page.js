@@ -8,7 +8,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 
 export default function Signin() {
-  console.log(process.env.BASE_URL);
+  // console.log(process.env.BASE_URL);
   // Step 2: Add state variables for email, emailError, and handleEmailChange
   const router = useRouter();
   const [email, setEmail] = useState("");
