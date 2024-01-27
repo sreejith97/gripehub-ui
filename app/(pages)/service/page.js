@@ -5,7 +5,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import ComplaintTable from "./complaintTable/page";
 
 const ServicePage = () => {
   const router = useRouter();
@@ -110,7 +109,7 @@ const ServicePage = () => {
         {complaints ? (
           complaints.length > 0 ? (
             <div className="max-w-full overflow-x-hidden">
-              <ComplaintTable complaints={complaints} />
+              <ComplaintList complaints={complaints} />
             </div>
           ) : (
             "No complaints"
