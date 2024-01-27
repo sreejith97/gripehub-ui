@@ -51,8 +51,8 @@ const MobileDesign = ({ complaints, isUser }) => {
     <>
       <div className="lg:overflow-x-hidden overflow-x-scroll w-[400px] lg:w-auto lg:hidden">
         <div className="w-full overflow-x-scroll">
-          {sortedComplaints.map((complaint) => (
-            <div key={complaint.id} className="mb-4 border border-gray-300 p-4">
+          {sortedComplaints.map((complaint, key) => (
+            <div key={key} className="mb-4 border border-gray-300 p-4">
               <div className="mb-2">
                 <strong>Complaint Number:</strong> {complaint.complaintNumber}
               </div>
