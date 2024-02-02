@@ -8,3 +8,30 @@ body {
   font-family: "Source Sans 3", sans-serif;
   font-family: "Ubuntu", sans-serif;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.moveRight {
+  transform: translateX(
+    -500px
+  ); /* Adjust the value based on how much you want to move the element */
+  transition: transform 0.5s ease; /* Adjust the duration and easing function as needed */
+}
+.moveLeft {
+  transform: translateX(
+    0px
+  ); /* Adjust the value based on how much you want to move the element */
+  transition: transform 0.5s ease; /* Adjust the duration and easing function as needed */
+}
+
+.open-sidebar {
+  transform: translateX(0); /* Assuming you want to slide in from the left */
+  transition: transform 0.3s ease-in-out;
+}
+
+.close-sidebar {
+  transform: translateX(0); /* Slide out to the left */
+  transition: transform 0.3s ease-in-out;
+}

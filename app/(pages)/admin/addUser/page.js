@@ -85,7 +85,7 @@ const AddUser = () => {
   };
 
   return (
-    <div className="flex items-center justify-center  h-screen bg-gray-100 p-4 ">
+    <div className="flex items-center justify-center  h-screen ">
       {apiMessage && (
         <div className="absolute lg:top-[70px] lg:right-2 w-[400px] h-[60px] bg-blue-200 flex items-center justify-start rounded-md shadow-sm font-semibold p-2 gap-3">
           <FaBell />

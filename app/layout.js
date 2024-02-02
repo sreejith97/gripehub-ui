@@ -2,6 +2,8 @@
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Header from "@/components/header/page";
+import Sidenav from "@/components/Sidenav/page";
+import DashboardLayout from "@/components/DashboardLayout/page";
 
 // const inter = Ubuntu({ subsets: ["latin"] });
 
@@ -15,8 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AuthProvider>
-          <Header />
-          <div className="mt-20">{children}</div>
+          {/* <Header />
+          <div className="mt-[60px]">{children}</div> */}
+          {/* <DashboardLayout> */}
+          <div className="">{children}</div>
+          {/* </DashboardLayout> */}
         </AuthProvider>
       </body>
     </html>

@@ -12,6 +12,7 @@ import ServicePage from "./(pages)/service/page";
 import ProductPage from "./(pages)/product/page";
 import UserPage from "./(pages)/user/page";
 import LoadingPage from "@/components/LoadingImage/page";
+import DashboardLayout from "@/components/DashboardLayout/page";
 
 export default function Home() {
   const { login, user, setIsLogin } = useAuth();
@@ -92,6 +93,6 @@ export default function Home() {
       <LoadingPage />
     </div>
   ) : (
-    <div className=""> {componentToRender}</div>
+    <DashboardLayout className=""> {componentToRender}</DashboardLayout>
   );
 }

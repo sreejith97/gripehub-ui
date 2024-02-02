@@ -82,11 +82,8 @@ const ProductPage = () => {
           Product Section
         </h1>
       </div>
-      <div className="my-6 w-full lg:w-auto flex flex-col lg:flex-row justify-center items-center lg:gap-10">
-        {/* <button className="p-2 bg-slate-500 rounded-lg">Add user</button>
-        <button className="p-2 bg-slate-500 rounded-lg">Add user</button>
-        <button className="p-2 bg-slate-500 rounded-lg">Add user</button> */}
-
+      {/* <div className="my-6 w-full lg:w-auto flex flex-col lg:flex-row justify-center items-center lg:gap-10">
+  
         <div
           className="w-full lg:w-[200px] h-[50px] lg:h-[70px] bg-blue-300 p-4 rounded-lg flex items-center justify-center cursor-pointer hover:scale-105 transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-blue-500 duration-300 mb-4 lg:mb-0"
           onClick={() => {
@@ -103,7 +100,7 @@ const ProductPage = () => {
         >
           Check Status
         </div>
-      </div>
+      </div> */}
 
       <div className="my-7">
         {complaints ? (
